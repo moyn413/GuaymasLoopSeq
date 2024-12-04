@@ -1,3 +1,37 @@
+#================================================================
+# LoopSeq 16S rRNA gene sequence data processing using DADA2
+#================================================================
+
+#=== This script follows the PacBio tutorial and modifications suggested on the DADA2 github issues page
+#  https://benjjneb.github.io/LRASManuscript/LRASms_fecal.html
+#  https://github.com/benjjneb/dada2/issues/991
+
+#=== Clear all objects in workspace
+rm(list = ls())
+
 #=================================
-# 16S rRNA processing of LoopSeq data using DADA2
+#   Load Required Packages
 #=================================
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install("phyloseq")
+install.packages("igraph")
+library(dada2)
+library(phyloseq)
+library(Biostrings)
+library(ggplot2)
+library(ShortRead)
+library(reshape2)
+library(plyr)
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(readxl)
+library(gridExtra)
+library(readr)
+library(stringr)
+library(kableExtra) 
+
+
+
+
