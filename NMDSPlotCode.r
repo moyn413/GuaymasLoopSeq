@@ -65,4 +65,27 @@ plt <- ggplot(nmds_scores, aes(x = NMDS1, y = NMDS2, color = mat_color)) +
 ggsave("nmds_plot.pdf", plot = plt, 
        path = "/path/to/where/you/want/to/save/plots/", 
        width = 12, height = 10)
+# OPTIONAL: Create a dendrogram to investigate clusters on the NMDS plot
+
+# Perform hierarchical clustering on Bray-Curtis distance matrix
+hc <- hclust(dist_matrix)
+
+# Convert the hclust object to a dendrogram
+dend <- as.dendrogram(hc)
+
+# Plot the dendrogram
+dendro_plot <- dend %>%
+  set("branches_lwd", 2) %>%  # Adjust branch thickness
+  set("labels_cex", 0.8) %>%  # Adjust label size
+  set("labels_col", "black") %>%  # Set label color
+  set("hang", 0.1)  # Adjust label position for better readability
+plot(dendro_plot, 
+     main = "Dendrogram based on Bray-Curtis Dissimilarity", 
+     xlab = "Sample", 
+     ylab = "Bray-Curtis Dissimilarity")
+
+# Save the plot as a PDF
+ggsave("dendrogram_plot.pdf", 
+       plot = dendro_plot, 
+       width = 12, height = 10)
              
